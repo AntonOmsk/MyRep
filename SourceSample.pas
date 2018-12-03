@@ -1,10 +1,10 @@
-// Часть кода была умышленно вырезана, чтобы не возникало проблем с разглашением исходников
-// Данный код был написан с настройками редактора Delphi:
+// ╫рёЄ№ ъюфр с√ыр єь√°ыхээю т√Ёхчрэр, ўЄюс√ эх тючэшърыю яЁюсыхь ё Ёрчуыр°хэшхь шёїюфэшъют
+// ─рээ√щ ъюф с√ы эряшёрэ ё эрёЄЁющърьш ЁхфръЄюЁр Delphi:
 // Block indent = 2
 // Tab Stop = 2.
-// Use tab character - включен
+// Use tab character - тъы■ўхэ
 // Right margin = 140
-// При таких параметрах выравнивания в коде должны выглядеть одинаково аккуратно по всему коду
+// ╧Ёш Єръшї ярЁрьхЄЁрї т√Ёртэштрэш  т ъюфх фюыцэ√ т√уы фхЄ№ юфшэръютю ръъєЁрЄэю яю тёхьє ъюфє
 
 procedure TMainForm.MakeActionToolbar();
 var
@@ -37,7 +37,7 @@ var
 
 	procedure SetToolBarYearVisible;
 	begin
-		// Нужно установить видимость тулбару на открываемой форме
+		// ═єцэю єёЄрэютшЄ№ тшфшьюёЄ№ ЄєысрЁє эр юЄъЁ√трхьющ ЇюЁьх
 		case FormID of
 			atwOwners: MakeYearToolbar((ActiveMDIChild as TfrmGZOwners).ComboFinYears);
 			atwReestr: MakeYearToolbar(
@@ -61,15 +61,15 @@ var
 	end;
 
 begin
-	// Если окно с тулбаром, устанавливаем видимость тулбаров на форме
+	// ┼ёыш юъэю ё ЄєысрЁюь, єёЄрэртыштрхь тшфшьюёЄ№ ЄєысрЁют эр ЇюЁьх
 	if (ActiveMDIChild is TMDIFormTB) and (ActiveMDIChild.ClassName <> str_Desktop) then
 	begin
 		FormID := TActionToolbarWindow(GetClassIndex(ActiveMDIChild.ClassName));
 	end
 	else
 	begin
-		// Этот блок происходит только в случае когда показывается окно без тулбаров(один лишь dxBar_ScreenSpace)
-		// Прежде чем очистим тулбары, перейдем на предыдущую вкладку(не будем переходить на закладку действий)
+		// ▌ЄюЄ сыюъ яЁюшёїюфшЄ Єюы№ъю т ёыєўрх ъюуфр яюърч√трхЄё  юъэю схч ЄєысрЁют(юфшэ ыш°№ dxBar_ScreenSpace)
+		// ╧Ёхцфх ўхь юўшёЄшь ЄєысрЁ√, яхЁхщфхь эр яЁхф√фє∙є■ тъырфъє(эх сєфхь яхЁхїюфшЄ№ эр чръырфъє фхщёЄтшщ)
 		dxRibbon.ActiveTab := LastRibbonTab;
 		ClearToolbars(dxRibbon_Actions);
 
@@ -81,28 +81,28 @@ begin
 		Exit;
 	end;
 
-	// Оптимизация 3. Если тулбар уже нарисован (пользователь перешел на закладку действия сам)
+	// ╬яЄшьшчрЎш  3. ┼ёыш ЄєысрЁ єцх эрЁшёютрэ (яюы№чютрЄхы№ яхЁх°хы эр чръырфъє фхщёЄтш  ёрь)
 	if LastActiveWindowHandle <> ActiveMDIChild.Handle then
 	begin
-		// Скроем все содержимое
-		// Оптимизация 1.
-		// Нужно обязательно сначала скрыть все содержимое закладки, от крупного к мелким, чтобы иключить перерисовку
+		// ╤ъЁюхь тёх ёюфхЁцшьюх
+		// ╬яЄшьшчрЎш  1.
+		// ═єцэю юс чрЄхы№эю ёэрўрыр ёъЁ√Є№ тёх ёюфхЁцшьюх чръырфъш, юЄ ъЁєяэюую ъ ьхыъшь, ўЄюс√ шъы■ўшЄ№ яхЁхЁшёютъє
 		ClearToolbars(dxRibbon_Actions);
 
 		dxRibbon.BeginUpdate;
 		SetToolBarYearVisible;
 
-		// СПРАВКА: порядок вызова SetToolbarActive не определяет порядок отображения тулбаров слева направо
-		// их порядок задан изначально на главной форме на риббоне. SetToolbarActive регулируют только видимость
+		// ╤╧╨└┬╩└: яюЁ фюъ т√чютр SetToolbarActive эх юяЁхфхы хЄ яюЁ фюъ юЄюсЁрцхэш  ЄєысрЁют ёыхтр эряЁртю
+		// шї яюЁ фюъ чрфрэ шчэрўры№эю эр уыртэющ ЇюЁьх эр Ёшссюэх. SetToolbarActive ЁхуєышЁє■Є Єюы№ъю тшфшьюёЄ№
 		case FormID of
 			{$REGION ' atwOwners '}
 			atwOwners:
 			begin
 				with (ActiveMDIChild as TfrmGZOwners) do
 				begin
-					// Оптимизация 2.
-					// Сначала назначим видимость кнопкам на невидимом тулбаре, и только в конце покажем тулбары
-					// Назначим действия кнопкам dxBar_MainObjectActions
+					// ╬яЄшьшчрЎш  2.
+					// ╤эрўрыр эрчэрўшь тшфшьюёЄ№ ъэюяърь эр эхтшфшьюь ЄєысрЁх, ш Єюы№ъю т ъюэЎх яюърцхь ЄєысрЁ√
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_MainObjectActions
 					AddTBItem(dxBar_MainObjectActions, dxButton_New, ActionNew);
 					AddTBItem(dxBar_MainObjectActions, dxButton_Property, ActionEdit);
 					AddTBItem(dxBar_MainObjectActions, dxButton_Delete, ActionDelete);
@@ -115,7 +115,7 @@ begin
 						AddTBItem(dxBar_MultiZakup, dxButton_MultiPlanGraf, ActionPlanGraf44);
 						AddTBItem(dxBar_MultiZakup, dxButton_MultiNotices44, ActionViewNotices);
 						AddTBItem(dxBar_MultiZakup, dxButton_MultiPlanZakup223, ActionPlanGraf223, '', [], True);
-						AddTBItem(dxBar_MultiZakup, dxButton_MultiNotices223, ActionViewNotices223); // Извещения 223 еще не готовы
+						AddTBItem(dxBar_MultiZakup, dxButton_MultiNotices223, ActionViewNotices223); // ╚чтх∙хэш  223 х∙х эх уюЄют√
 
 						AddTBItem(
 							dxBar_MultiZakup,
@@ -125,7 +125,7 @@ begin
 							[ActionViewSpec, ActionViewOplat, ActionViewNotReestr{, ActionViewNotices223}],
 							'',
 							[],
-							True); // Извещения 223 еще не готовы
+							True); // ╚чтх∙хэш  223 х∙х эх уюЄют√
 
 						AddTBItem(dxBar_MultiZakup, dxContainer_MultiLimits, 24);
 						AddTBItem(dxBar_MultiZakup, dxButton_MultiLimitFin, ActionLimitsFin, dxContainer_MultiLimits);
@@ -138,34 +138,34 @@ begin
 						AddTBItem(dxBar_MultiZakup, dxButton_MultiGRLS, ActionViewGRLS, dxContainer_MultiHelpers);
 					{$ENDIF}
 
-					// Назначим действия кнопкам dxBar_Integration
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_Integration
 					AddTBItem(dxBar_Integration, dxButton_ImportFromPortal, ActionImportFromOOS, '', [ivlLargeIconWithText]);
 
-					// Назначим действия кнопкам dxBar_Options
-					AddTBItem(dxBar_Integration, dxButton_ExportXLS, ActionExport, '', [], True); // Одиночная кнопка без выпадающего списка;
-					AddTBItem(dxBar_Integration, dxButton_ImportXLS, ActionImport); // Одиночная кнопка без выпадающего списка;
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_Options
+					AddTBItem(dxBar_Integration, dxButton_ExportXLS, ActionExport, '', [], True); // ╬фшэюўэр  ъэюяър схч т√ярфр■∙хую ёяшёър;
+					AddTBItem(dxBar_Integration, dxButton_ImportXLS, ActionImport); // ╬фшэюўэр  ъэюяър схч т√ярфр■∙хую ёяшёър;
 
 					{$IFDEF MULTI_OWNERS}
 					AddTBItem(dxBar_Data, dxButton_CheckActual, ActionCheckActual);
 					AddTBItem(dxBar_Data, dxButton_NoticeSchedule, ActionNoticeSchedule);
 					{$ENDIF}
 
-					// Назначим действия кнопкам dxBar_Data
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_Data
 					AddTBItem(dxBar_Data, dxButton_Plan, ActionCheckInRNP);
 					AddTBItem(dxBar_Data, dxButton_Notice, ActionCheckInSMP);
 
-					// Блок "Главный" - Организация
+					// ┴ыюъ "├ыртэ√щ" - ╬ЁурэшчрЎш 
 					SetToolbarActive(dxBar_MainObjectActions, strRibbonToolbarOrg);
 
 					{$IFDEF MULTI_OWNERS}
-						// Блок "Закупки по организации" - Закупки по организации
+						// ┴ыюъ "╟ръєяъш яю юЁурэшчрЎшш" - ╟ръєяъш яю юЁурэшчрЎшш
 						SetToolbarActive(dxBar_MultiZakup, strRibbonToolbarMultiZakup);
 					{$ENDIF}
 
-					// Блок "Интеграция" - Интеграция
+					// ┴ыюъ "╚эЄхуЁрЎш " - ╚эЄхуЁрЎш 
 					SetToolbarActive(dxBar_Integration, strRibbonToolbarIntegration);
 
-					// Блок "Сервис" - Данные реестра
+					// ┴ыюъ "╤хЁтшё" - ─рээ√х ЁххёЄЁр
 					SetToolbarActive(dxBar_Data, strRibbonToolbarService);
 				end;
 			end;
@@ -176,7 +176,7 @@ begin
 			begin
 				with (ActiveMDIChild as TfrmPlanZakup) do
 				begin
-					// Назначим действия кнопкам dxBar_MainObjectActions
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_MainObjectActions
 					AddTBItem(dxBar_MainObjectActions, dxButton_New, ActionNew, dxPopupMenu_Copy, ActionCopy, strRibbonActionNew);
 					AddTBItem(dxBar_MainObjectActions, dxButton_Property, ActionEdit);
 					AddTBItem(dxBar_MainObjectActions, dxButton_Delete, ActionDelete);
@@ -184,30 +184,30 @@ begin
 					AddTBItem(dxBar_MainObjectActions, dxButton_Search, ActionFind);
 					AddTBItem(dxBar_MainObjectActions, dxButton_Filter, ActionFilter);
 
-					// Назначим действия кнопкам dxBar_MinorObjectActions
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_MinorObjectActions
 					AddTBItem(dxBar_MinorObjectActions, dxButton_MinorNew, ActionNewPlan, strRibbonActionNewPlan);
 					AddTBItem(
 						dxBar_MinorObjectActions, dxButton_MinorProperty, ActionEditPlan, strRibbonActionEditPlan);
 					AddTBItem(
 						dxBar_MinorObjectActions, dxButton_MinorDelete, ActionDeletePlan, strRibbonActionDeletePlan);
 
-					// Назначим действия кнопкам dxBar_PrintForms
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_PrintForms
 					AddTBItem(dxBar_PrintForms, dxButton_XLSForm, ActionPrintXLSForm);
 					AddTBItem(dxBar_PrintForms, dxButton_Rational, ActionSolutionForm);
 
-					// Назначим действия кнопкам dxBar_Integration
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_Integration
 					AddTBItem(dxBar_Integration, dxButton_ExportToPortal, ActionExportXLS4OOS, '', [ivlLargeIconWithText]);
 					AddTBItem(dxBar_Integration, dxButton_ImportFromPortal, ActionImportFromOOS,  '', [ivlLargeIconWithText]);
 
-					// Импорт экспорт dxBar_Integration
-					AddTBItem(dxBar_Integration, dxContainer_Export, 57, '', True); // было dxBar_Options
-					AddTBItem(dxBar_Integration, dxContainer_Import, 56); // было dxBar_Options
-					AddTBItem(dxBar_Integration, dxButton_ImportInternal, ActionImport, dxContainer_Import); // было dxBar_Options
-					AddTBItem(dxBar_Integration, dxButton_ExportInternal, ActionExport, dxContainer_Export); // было dxBar_Options
-					AddTBItem(dxBar_Integration, dxButton_ImportXLS, ActionImportRAW, dxContainer_Import); // было dxBar_Options
-					AddTBItem(dxBar_Integration, dxButton_ExportXLS, ActionExportXLS, dxContainer_Export); // было dxBar_Options
+					// ╚ьяюЁЄ ¤ъёяюЁЄ dxBar_Integration
+					AddTBItem(dxBar_Integration, dxContainer_Export, 57, '', True); // с√ыю dxBar_Options
+					AddTBItem(dxBar_Integration, dxContainer_Import, 56); // с√ыю dxBar_Options
+					AddTBItem(dxBar_Integration, dxButton_ImportInternal, ActionImport, dxContainer_Import); // с√ыю dxBar_Options
+					AddTBItem(dxBar_Integration, dxButton_ExportInternal, ActionExport, dxContainer_Export); // с√ыю dxBar_Options
+					AddTBItem(dxBar_Integration, dxButton_ImportXLS, ActionImportRAW, dxContainer_Import); // с√ыю dxBar_Options
+					AddTBItem(dxBar_Integration, dxButton_ExportXLS, ActionExportXLS, dxContainer_Export); // с√ыю dxBar_Options
 
-					// Назначим действия кнопкам dxBar_Data
+					// ═рчэрўшь фхщёЄтш  ъэюяърь dxBar_Data
 					AddTBItem(dxBar_Data, dxButton_PlansCompare, ActionPlansCompare);
 					AddTBItem(
 						dxBar_Data,
@@ -225,25 +225,25 @@ begin
 					AddTBItem(dxBar_Data, dxButton_SetPositionNoChanged, ActionClearChangedValue);
 					AddTBItem(dxBar_Data, dxButton_ImportPGPosition, ActionImportFromPG);
 
-					// Блок "Главный" - Позиция
+					// ┴ыюъ "├ыртэ√щ" - ╧ючшЎш 
 					SetToolbarActive(dxBar_MainObjectActions, strRibbonToolbarPlanPosition);
-					// Блок "Второстепенный" - План
+					// ┴ыюъ "┬ЄюЁюёЄхяхээ√щ" - ╧ырэ
 					SetToolbarActive(dxBar_MinorObjectActions, strRibbonToolbarPlan);
-					// Блок "Печатные формы" - Печатные формы
+					// ┴ыюъ "╧хўрЄэ√х ЇюЁь√" - ╧хўрЄэ√х ЇюЁь√
 					SetToolbarActive(dxBar_PrintForms, strRibbonToolbarPrintForms);
-					// Блок "Интеграция" - Интеграция
+					// ┴ыюъ "╚эЄхуЁрЎш " - ╚эЄхуЁрЎш 
 					SetToolbarActive(dxBar_Integration, strRibbonToolbarIntegration);
-					// Блок "Сервис" - Дополнительно
+					// ┴ыюъ "╤хЁтшё" - ─юяюыэшЄхы№эю
 					SetToolbarActive(dxBar_Data, strRibbonToolbarService);
 				end;
 			end;
 			{$ENDREGION}
 		end;
 
-		// ОПТИМИЗАЦИЯ Active=True должен быть после EndUpdate так выигрываем 0.02с
+		// ╬╧╥╚╠╚╟└╓╚▀ Active=True фюыцхэ с√Є№ яюёых EndUpdate Єръ т√шуЁ√трхь 0.02ё
 		dxRibbon.EndUpdate;
 
-		// После того как закладка действий доставлена нужно загрузить им изображения
+		// ╧юёых Єюую ъръ чръырфър фхщёЄтшщ фюёЄртыхэр эєцэю чруЁєчшЄ№ шь шчюсЁрцхэш 
 		LoadGlyphOnToolbars(dxRibbon_Actions);
 	end;
 
